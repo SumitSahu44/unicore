@@ -4,21 +4,21 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const HeroSection = () => {
   const { scrollY } = useScroll();
 
-  // Scroll animations (Blur hataya, sirf subtle movement rakha hai)
-  const yParallax = useTransform(scrollY, [0, 500], [0, 150]);
-  const contentOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // Yahan values badha di hain taaki content turant gayab na ho
+  // Pehle 300 pe 0 opacity ho rahi thi, ab 800 tak handle karega
+  const yParallax = useTransform(scrollY, [0, 800], [0, 200]);
+  const contentOpacity = useTransform(scrollY, [0, 600], [1, 0]);
 
-  // Animation Variants for Landing
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0, 
@@ -29,7 +29,7 @@ const HeroSection = () => {
   return (
     <div className="relative min-h-screen w-full bg-[#050505] flex flex-col items-center justify-center overflow-hidden font-sans">
       
-      {/* 1. Background Grid with subtle Pulse */}
+      {/* 1. Background Grid */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.05 }}
@@ -42,9 +42,9 @@ const HeroSection = () => {
         }} 
       />
 
-      {/* 2. Brand Accents */}
+      {/* 2. Glow Accent */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#39ff14]/[0.05] blur-[120px] rounded-full" />
+        <div className="absolute top-[-5%] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#39ff14]/[0.03] blur-[100px] rounded-full" />
       </div>
 
       {/* 3. Main Content Section */}
@@ -52,60 +52,55 @@ const HeroSection = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        // Opacity aur Parallax ko aur "Loose" rakha hai taaki smooth transition ho
         style={{ opacity: contentOpacity, y: yParallax }}
         className="relative z-10 max-w-6xl px-6 text-center"
       >
         {/* Animated Badge */}
-        <motion.div variants={itemVariants} className="inline-flex  mt-22 md:mt-0 items-center gap-2 px-4 py-2 mb-10 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-xl">
+        <motion.div variants={itemVariants} className="inline-flex mt-10 md:mt-0 items-center gap-2 px-4 py-2 mb-8 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-xl">
           <div className="w-1.5 h-1.5 rounded-full bg-[#39ff14] animate-pulse" />
           <span className="text-gray-400 font-bold tracking-[0.2em] text-[10px] uppercase">
             Unicore Premium Protection
           </span>
         </motion.div>
 
-        {/* Heading with Character Reveal Feel */}
+        {/* Heading */}
         <motion.h1 
           variants={itemVariants}
-          className="text-6xl md:text-8xl lg:text-[120px] font-black text-white tracking-tighter leading-[0.85] mb-10 italic"
+          className="text-5xl md:text-8xl lg:text-[110px] font-black text-white tracking-tighter leading-[0.85] mb-8 italic"
         >
           ENGINEERED <br />
-          <motion.span 
-            animate={{ 
-              textShadow: ["0 0 0px rgba(57,255,20,0)", "0 0 20px rgba(57,255,20,0.2)", "0 0 0px rgba(57,255,20,0)"] 
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-600"
-          >
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-500">
             FOR EXTREME
-          </motion.span>
+          </span>
         </motion.h1>
 
-        {/* Subtext Reveal */}
+        {/* Subtext */}
         <motion.p 
           variants={itemVariants}
-          className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-14 tracking-wide"
+          className="text-gray-400 text-base md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide"
         >
           Seals instantly. Lasts for years. The definitive 2-in-1 technology 
           designed for those who refuse to stop.
         </motion.p>
 
-        {/* Buttons Reveal */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-          <button className="group relative px-14 py-5 bg-[#39ff14] text-black font-extrabold rounded-full transition-all hover:scale-105 hover:shadow-[0_20px_40px_rgba(57,255,20,0.3)] active:scale-95">
+        {/* Buttons */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <button className="group relative px-12 py-4 bg-[#39ff14] text-black font-extrabold rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(57,255,20,0.15)]">
             <span className="relative z-10 uppercase tracking-tighter text-sm">Explore Products</span>
           </button>
           
-          <button className="group px-10 py-5 bg-transparent text-white font-bold rounded-full border border-white/10 hover:bg-white/5 transition-all flex items-center gap-4">
+          <button className="group px-8 py-4 bg-transparent text-white font-bold rounded-full border border-white/10 hover:bg-white/5 transition-all flex items-center gap-3">
              <span className="uppercase tracking-tighter text-sm opacity-70 group-hover:opacity-100">Watch the Tech</span>
-             <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#39ff14] transition-colors">
-                <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[7px] border-l-white border-b-[4px] border-b-transparent ml-0.5" />
+             <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#39ff14]">
+                <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-white border-b-[3px] border-b-transparent ml-0.5" />
              </div>
           </button>
         </motion.div>
       </motion.div>
 
-      {/* 4. Bottom Perspective Fade */}
-      <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-[#050505] to-transparent z-20 pointer-events-none" />
+      {/* 4. Bottom Perspective Fade (Isko kam kiya taaki black out na lage) */}
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#050505] to-transparent z-20 pointer-events-none" />
     </div>
   );
 };
