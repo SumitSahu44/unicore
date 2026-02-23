@@ -50,7 +50,7 @@ const MinimalVideoSection = () => {
             playsInline
             className="w-full h-full object-cover opacity-80"
           >
-            <source src="videos/unicore-video.mp4" type="video/mp4" />
+            <source src="/videos/unicore-video.mp4" type="video/mp4" />
           </video>
 
           {/* Overlay Text that appears when video is full-sized */}
