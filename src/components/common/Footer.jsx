@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -19,16 +20,37 @@ const Footer = () => {
               Redefining tyre safety with advanced 2-in-1 technology. Engineered for the streets, trusted by the world.
             </p>
             <div className="flex gap-4">
-              {['FB', 'IG', 'TW', 'LI'].map((social) => (
                 <motion.a 
-                  key={social}
-                  whileHover={{ y: -5, color: '#39ff14' }}
-                  href="#" 
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-xs font-bold text-gray-400 transition-colors"
-                >
-                  {social}
-                </motion.a>
-              ))}
+                whileHover={{ y: -5 }}
+                href="#"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#39ff14] transition-colors"
+              >
+                <FaFacebookF size={14} />
+              </motion.a>
+
+              <motion.a 
+                whileHover={{ y: -5 }}
+                href="#"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#39ff14] transition-colors"
+              >
+                <FaInstagram size={14} />
+              </motion.a>
+
+              <motion.a 
+                whileHover={{ y: -5 }}
+                href="#"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#39ff14] transition-colors"
+              >
+                <FaTwitter size={14} />
+              </motion.a>
+
+              <motion.a 
+                whileHover={{ y: -5 }}
+                href="#"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#39ff14] transition-colors"
+              >
+                <FaLinkedinIn size={14} />
+              </motion.a>
             </div>
           </div>
 
@@ -76,11 +98,11 @@ const Footer = () => {
           <p className="text-gray-500 text-xs">
             © 2026 UNICORE TYREPROTECT. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <span className="text-gray-500 text-xs italic">Crafted by</span>
             <span className="text-white font-bold text-xs tracking-tighter">Digital Success Solutions (DSS)</span>
             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-          </div>
+          </div> */}
         </div>
       </div>
 

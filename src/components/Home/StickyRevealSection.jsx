@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const StickyRevealSection = () => {
   return (
-    <div className="relative w-full bg-[#050505]">
+    <div className="relative w-full bg-[#050505]" >
       
       {/* Scroll Wrapper */}
       <div className="relative h-[200vh] w-full"> 
@@ -12,7 +12,7 @@ const StickyRevealSection = () => {
         <section className="sticky top-0 h-screen w-full overflow-hidden bg-[#050505] flex items-center justify-center z-10">
           <div className="absolute inset-0">
             <img 
-              src="/images/car.jpg" 
+              src="images/car.jpg" 
               className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000"
               alt="Background"
             />
@@ -37,7 +37,7 @@ const StickyRevealSection = () => {
         </section>
 
         {/* SECTION 2: Overlapping Reveal Card (Upar se aane wala) */}
-        <section className="relative z-30 min-h-screen bg-white  shadow-[0_-50px_100px_rgba(0,0,0,0.9)] py-32 px-6">
+        <section id='reviews' className="relative z-30 min-h-screen bg-white  shadow-[0_-50px_100px_rgba(0,0,0,0.9)] py-32 px-6">
           <div className="max-w-7xl mx-auto">
             
             {/* Creative Grid Layout */}

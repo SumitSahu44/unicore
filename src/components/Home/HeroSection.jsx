@@ -85,18 +85,34 @@ const HeroSection = () => {
         </motion.p>
 
         {/* Buttons */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="group relative px-12 py-4 bg-[#39ff14] text-black font-extrabold rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(57,255,20,0.15)]">
-            <span className="relative z-10 uppercase tracking-tighter text-sm">Explore Products</span>
-          </button>
-          
-          <button className="group px-8 py-4 bg-transparent text-white font-bold rounded-full border border-white/10 hover:bg-white/5 transition-all flex items-center gap-3">
-             <span className="uppercase tracking-tighter text-sm opacity-70 group-hover:opacity-100">Watch the Tech</span>
-             <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#39ff14]">
-                <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-white border-b-[3px] border-b-transparent ml-0.5" />
-             </div>
-          </button>
-        </motion.div>
+     <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+  {/* Explore Products Button -> Scrolls to #products */}
+  <a 
+    href="#products"
+    onClick={(e) => {
+      e.preventDefault();
+      document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth' });
+    }}
+    className="group relative px-12 py-4 bg-[#39ff14] text-black font-extrabold rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(57,255,20,0.15)] text-center cursor-pointer"
+  >
+    <span className="relative z-10 uppercase tracking-tighter text-sm">Explore Products</span>
+  </a>
+  
+  {/* Watch the Tech Button -> Scrolls to #tech (or your video section ID) */}
+  <a 
+    href="#watch"
+    onClick={(e) => {
+      e.preventDefault();
+      document.querySelector('#watch')?.scrollIntoView({ behavior: 'smooth' });
+    }}
+    className="group px-8 py-4 bg-transparent text-white font-bold rounded-full border border-white/10 hover:bg-white/5 transition-all flex items-center justify-center gap-3 cursor-pointer"
+  >
+     <span className="uppercase tracking-tighter text-sm opacity-70 group-hover:opacity-100">Watch the Tech</span>
+     <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#39ff14]">
+        <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-white border-b-[3px] border-b-transparent ml-0.5" />
+     </div>
+  </a>
+</motion.div>
       </motion.div>
 
       {/* 4. Bottom Perspective Fade (Isko kam kiya taaki black out na lage) */}

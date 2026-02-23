@@ -29,6 +29,7 @@ const ScrollRevealSection = () => {
 
   return (
     <section 
+    id="safety"
       ref={targetRef} 
       className="relative min-h-screen w-full bg-[#050505] py-24 flex items-center overflow-hidden"
     >
@@ -91,7 +92,7 @@ const ScrollRevealSection = () => {
             {/* Image Frame with Glassmorphism shadow */}
             <div className="relative z-10 rounded-[40px] overflow-hidden border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)]">
               <img 
-                src="/images/1.webp" // Aapki image ka path
+                src="images/1.webp" // Aapki image ka path
                 alt="Unicore Performance Test"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />

@@ -17,7 +17,7 @@ const MinimalVideoSection = () => {
   const textOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
 
   return (
-    <section ref={sectionRef} className="relative h-[150vh] bg-white flex flex-col items-center">
+    <section ref={sectionRef} id="watch" className="relative h-[150vh] bg-white flex flex-col items-center">
       
       {/* Sticky Container taaki animation screen pe lock rahe */}
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">

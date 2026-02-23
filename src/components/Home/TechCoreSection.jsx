@@ -51,7 +51,7 @@ const TechCoreSection = () => {
   ];
 
   return (
-    <section className="relative py-32 bg-[#050505] overflow-hidden">
+    <section className="relative py-32 bg-[#050505] overflow-hidden" id='tech'>
       {/* Background Decor - Subtle Branding */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none flex items-center justify-center">
         <h2 className="text-[25vw] font-black uppercase tracking-tighter text-white select-none">CORE</h2>
@@ -79,7 +79,7 @@ const TechCoreSection = () => {
 
               {/* Product Image - Assuming 'unicore-2.png' is your close-up */}
               <motion.img 
-                src="/images/unicore-2.png" 
+                src="images/unicore-2.png" 
                 alt="Unicore Tech Detail" 
                 className="w-3/5 h-auto transition-transform duration-1000 group-hover:scale-105 drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]"
               />

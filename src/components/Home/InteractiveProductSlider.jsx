@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const products = [
-   { id: 1, name: "Unicore 2 in 1", color: "#74b637", img: "/images/unicore-1.png",  },
+   { id: 1, name: "Unicore 2 in 1", color: "#74b637", img: "images/unicore-1.png",  },
     
- { id: 2, name: "Dazzler Sealant", color: "#1377c2", img: "/images/unicore-2.png", },
-   { id: 3, name: "Unicore Nextgen", color: "#222222", img: "/images/unicore-3.png", },
+ { id: 2, name: "Dazzler Sealant", color: "#1377c2", img: "images/unicore-2.png", },
+   { id: 3, name: "Unicore Nextgen", color: "#222222", img: "images/unicore-3.png", },
  
 ];
 
@@ -21,6 +21,7 @@ const InteractiveProductSlider = () => {
 
   return (
     <motion.section 
+    id="products"
       animate={{ backgroundColor: products[index].color }}
       className="relative min-h-screen w-full transition-colors duration-700 ease-in-out flex flex-col md:flex-row overflow-hidden font-sans"
     >
