@@ -6,6 +6,7 @@ import StickyRevealSection from "./StickyRevealSection";
 import InteractiveProductSlider from "./InteractiveProductSlider";
 import ScrollRevealSection from "./ScrollRevealSection";
 import TyreRevolutionSection from "./TyreRevolutionSection";
+import ProductScrollSequence from "./ProductScrollSequence";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
      <MinimalVideoSection />
      <TyreRevolutionSection />
        <TechCoreSection />
+       <ProductScrollSequence />
        <ScrollRevealSection />
          <InteractiveProductSlider />
        <StickyRevealSection />
