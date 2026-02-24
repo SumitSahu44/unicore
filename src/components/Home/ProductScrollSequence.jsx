@@ -16,13 +16,14 @@ const ProductScrollSequence = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+    
+    // Original Image Resolution
     canvas.width = 1920;
     canvas.height = 1080;
 
     const images = [];
     const sequence = { frame: 1 };
 
-    // Preloading Logic
     let loadedImages = 0;
     for (let i = 1; i <= frameCount; i++) {
       const img = new Image();
@@ -39,22 +40,21 @@ const ProductScrollSequence = () => {
       const img = images[sequence.frame - 1];
       if (img) {
         context.clearRect(0, 0, canvas.width, canvas.height);
+        // Drawing image to fill the canvas resolution exactly
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
       }
     };
 
-    // --- MAIN SYNCHRONIZED TIMELINE ---
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=800%", // Scroll depth badha di taaki slow aur premium lage
+        end: "+=600%", 
         pin: true,
         scrub: 1, 
       }
     });
 
-    // 1. Frames: Ye poori timeline (duration 10) tak chalega
     tl.to(sequence, {
       frame: frameCount,
       snap: "frame",
@@ -63,25 +63,14 @@ const ProductScrollSequence = () => {
       onUpdate: render,
     }, 0); 
 
-    // 2. Left Content: Jab frames 10% par hon tab aaye, 40% par chala jaye
+    // Text Animations with Sky Blue color
     tl.fromTo(".text-left", 
-      { opacity: 0, y: 50, filter: "blur(10px)" }, 
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 2 }, 
-      1 // Start position
-    ).to(".text-left", 
-      { opacity: 0, y: -50, filter: "blur(10px)", duration: 2 }, 
-      3 // End position
-    );
+      { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 2 }, 1 
+    ).to(".text-left", { opacity: 0, y: -50, duration: 2 }, 3.5);
 
-    // 3. Right Content: Jab frames 60% par hon tab aaye, 90% par jaye
     tl.fromTo(".text-right", 
-      { opacity: 0, y: 50, filter: "blur(10px)" }, 
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 2 }, 
-      6 // Start position
-    ).to(".text-right", 
-      { opacity: 0, y: -50, filter: "blur(10px)", duration: 2 }, 
-      8 // End position
-    );
+      { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 2 }, 6 
+    ).to(".text-right", { opacity: 0, y: -50, duration: 2 }, 8.5);
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -90,7 +79,7 @@ const ProductScrollSequence = () => {
 
   return (
     <div className="bg-black">
-      {/* Premium Loader */}
+      {/* Original Preloader */}
       {loadingProgress < 100 && (
         <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0a] text-white">
           <div className="text-2xl font-bold tracking-[0.2em] mb-4">UNICORE</div>
@@ -101,47 +90,46 @@ const ProductScrollSequence = () => {
         </div>
       )}
 
-      <section ref={sectionRef} className="relative w-full h-screen overflow-hidden">
+      <section ref={sectionRef} className="relative w-full h-screen flex items-center justify-center overflow-hidden">
         
-        {/* Background Frames (Canvas) */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Full Image Display - No Cropping */}
+        <div className="w-full h-full flex items-center justify-center pointer-events-none p-4">
           <canvas 
             ref={canvasRef} 
-            className="w-full h-full object-contain"
+            className="max-w-full max-h-full object-contain" 
+            style={{ 
+                aspectRatio: "16/9", // Match your 1920/1080 ratio
+                width: 'auto',
+                height: 'auto'
+            }}
           />
         </div>
 
         {/* Content Overlay */}
-        <div className="relative z-10 w-full h-full flex flex-col justify-between p-10 md:p-24 pointer-events-none">
+        <div className="absolute inset-0 z-10 w-full h-full flex flex-col justify-between p-8 md:p-24 pointer-events-none">
           
-          {/* Top Left Text */}
-          <div className="text-left text-white text-left max-w-lg">
-            <h2 className="text-5xl md:text-8xl font-black italic uppercase leading-[0.9]">
-              Pure <br /><span className="text-yellow-500 text-3xl md:text-5xl">Dry Fruit Power</span>
+          <div className="text-left text-white max-w-xl">
+            <h2 className="text-4xl md:text-7xl font-black italic uppercase leading-[0.9]">
+              Advanced <br /><span className="text-[#0ea5e9] text-2xl md:text-5xl">Sealant Tech</span>
             </h2>
-            <p className="mt-6 text-gray-400 text-lg border-l-2 border-yellow-500 pl-4">
-              Hamare UNICORE powder me milta hai asli dry fruits ka swad aur ayurvedic shakti.
+            <p className="mt-4 text-gray-300 text-base md:text-lg border-l-2 border-[#0ea5e9] pl-4">
+              Unicore liquid instantly seals punctures, keeping your journey smooth.
             </p>
           </div>
 
-          {/* Bottom Right Text */}
-          <div className="text-right text-white text-right self-end max-w-lg">
-             <h2 className="text-5xl md:text-8xl font-black italic uppercase leading-[0.9]">
-              Healthy <br /><span className="text-yellow-500 text-3xl md:text-5xl">Daily Routine</span>
+          <div className="text-right text-white self-end max-w-xl">
+             <h2 className="text-4xl md:text-7xl font-black italic uppercase leading-[0.9]">
+              Ride <br /><span className="text-[#0ea5e9] text-2xl md:text-5xl">Fearless</span>
             </h2>
-            <p className="mt-6 text-gray-400 text-lg border-right-2 border-yellow-500 pr-4">
-              Health aur energy ke liye ek behtareen premium choice.
+            <p className="mt-4 text-gray-300 text-base md:text-lg border-right-2 border-[#0ea5e9] pr-4">
+              Engineered for maximum durability and ultimate tyre protection.
             </p>
           </div>
 
         </div>
-
-        {/* Subtle Vignette for Professional Look */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 pointer-events-none"></div>
       </section>
 
-      {/* Spacer to allow for scroll completion */}
-      <div className="h-screen bg-black"></div>
+      <div className="h-[20vh] bg-black"></div>
     </div>
   );
 };
