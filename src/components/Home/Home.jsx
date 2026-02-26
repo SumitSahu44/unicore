@@ -7,16 +7,19 @@ import InteractiveProductSlider from "./InteractiveProductSlider";
 import ScrollRevealSection from "./ScrollRevealSection";
 import TyreRevolutionSection from "./TyreRevolutionSection";
 import ProductScrollSequence from "./ProductScrollSequence";
+import HeroSequence from "./HeroSequence";
 
 const Home = () => {
   return (
     <>
-      <HeroSection />
+    <HeroSequence />
+      <TechCoreSection />
+      
+      {/* <HeroSection /> */}
        <ProductShowcase />
      <MinimalVideoSection />
      <TyreRevolutionSection />
-       <TechCoreSection />
-       <ProductScrollSequence />
+      <ProductScrollSequence />
        <ScrollRevealSection />
          <InteractiveProductSlider />
        <StickyRevealSection />
