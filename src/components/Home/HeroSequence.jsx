@@ -4,6 +4,7 @@ const HeroSequence = () => {
   const canvasRef = useRef(null);
   const topTextRef = useRef(null);
   const bottomTextRef = useRef(null);
+  const introTextRef = useRef(null); // Naya ref intro text ke liye
   const totalFrames = 240;
   const imagesRef = useRef([]);
 
@@ -60,23 +61,28 @@ const HeroSequence = () => {
 
   // 3. Text ko Scroll ke hisaab se Fade In/Out karna
   const animateText = (fraction) => {
+    
+    // --- INTRO TEXT LOGIC (Naya) ---
+    // Start me dikhega (opacity 1), thoda sa scroll karte hi (0 to 0.05) fade out ho jayega
+    if (introTextRef.current) {
+      let introOpacity = 1 - (fraction * 20); // 0.05 fraction par 0 ho jayega
+      if (introOpacity < 0) introOpacity = 0;
+      introTextRef.current.style.opacity = introOpacity;
+    }
+
     // --- TOP TEXT LOGIC ---
-    // Top text 5% scroll se 45% scroll tak dikhega
     if (topTextRef.current) {
       let opacity = 0;
-      let translateY = 20; // Thoda niche se upar aayega
+      let translateY = 20;
 
       if (fraction > 0.05 && fraction < 0.45) {
         if (fraction < 0.15) {
-          // Fade In (0.05 to 0.15)
           opacity = (fraction - 0.05) / 0.1;
           translateY = 20 - (opacity * 20);
         } else if (fraction > 0.35) {
-          // Fade Out (0.35 to 0.45)
           opacity = 1 - ((fraction - 0.35) / 0.1);
           translateY = -(1 - opacity) * 20;
         } else {
-          // Fully Visible
           opacity = 1;
           translateY = 0;
         }
@@ -86,22 +92,18 @@ const HeroSequence = () => {
     }
 
     // --- BOTTOM TEXT LOGIC ---
-    // Bottom text 55% scroll se 95% scroll tak dikhega
     if (bottomTextRef.current) {
       let opacity = 0;
       let translateY = 20;
 
       if (fraction > 0.55 && fraction < 0.95) {
         if (fraction < 0.65) {
-          // Fade In (0.55 to 0.65)
           opacity = (fraction - 0.55) / 0.1;
           translateY = 20 - (opacity * 20);
         } else if (fraction > 0.85) {
-          // Fade Out (0.85 to 0.95)
           opacity = 1 - ((fraction - 0.85) / 0.1);
           translateY = -(1 - opacity) * 20;
         } else {
-          // Fully Visible
           opacity = 1;
           translateY = 0;
         }
@@ -111,7 +113,7 @@ const HeroSequence = () => {
     }
   };
 
-  // 4. Canvas rendering logic (Same as before)
+  // 4. Canvas rendering logic
   const renderFrame = (index) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -157,11 +159,27 @@ const HeroSequence = () => {
       <div id="hero-scroll-container" className="relative w-full h-[400vh] bg-black">
         <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-black">
           
-          {/* TOP CONTENT: top-[22%] lagaya hai taaki video ke paas rahe */}
+          {/* INTRO TEXT (Naya): Center me rahega aur scroll start karte hi gayab hoga */}
+          <div 
+            ref={introTextRef}
+            className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none transition-opacity duration-75 text-white"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold tracking-widest drop-shadow-lg text-gray-200">
+              SCROLL TO DISCOVER
+            </h2>
+            <div className="mt-4 animate-bounce">
+              {/* Ek chota sa arrow icon bhi laga diya hai scroll hint ke liye */}
+              <svg className="w-6 h-6 text-gray-400" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </div>
+          </div>
+
+          {/* TOP CONTENT */}
           <div 
             ref={topTextRef}
             className="absolute top-[22%] left-0 w-full z-10 px-6 text-center text-white pointer-events-none transition-opacity duration-75"
-            style={{ opacity: 0 }} // Initial state hidden
+            style={{ opacity: 0 }} 
           >
             <h1 className="text-3xl md:text-5xl font-bold tracking-wide drop-shadow-lg">
               Unicore Tyre Protector
@@ -177,11 +195,11 @@ const HeroSequence = () => {
             className="block w-full h-full z-0"
           ></canvas>
 
-          {/* BOTTOM CONTENT: bottom-[22%] lagaya hai taaki video ke paas rahe */}
+          {/* BOTTOM CONTENT */}
           <div 
             ref={bottomTextRef}
             className="absolute bottom-[22%] left-0 w-full z-10 px-6 text-center text-white pointer-events-none transition-opacity duration-75"
-            style={{ opacity: 0 }} // Initial state hidden
+            style={{ opacity: 0 }}
           >
             <h3 className="text-xl md:text-3xl font-semibold drop-shadow-lg">
               Self Sealing Agent
@@ -193,8 +211,6 @@ const HeroSequence = () => {
 
         </div>
       </div>
-      
-    
     </>
   );
 };
