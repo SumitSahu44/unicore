@@ -12,6 +12,8 @@ import HeroSequence from "./HeroSequence";
 const Home = () => {
   return (
     <>
+      <InteractiveProductSlider />
+      
     <HeroSequence />
       <TechCoreSection />
       
@@ -21,8 +23,7 @@ const Home = () => {
      <TyreRevolutionSection />
       <ProductScrollSequence />
        <ScrollRevealSection />
-         <InteractiveProductSlider />
-       <StickyRevealSection />
+        <StickyRevealSection />
     
       </>
   );
